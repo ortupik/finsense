@@ -17,7 +17,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -33,10 +32,10 @@ class PaymentServiceTest {
     private PaymentTransactionRepository paymentTransactionRepository;
 
     @Mock
-    private MockMobileMoneyService mockMobileMoneyService; // Mock the specific mock implementation
+    private MockMobileMoneyService mockMobileMoneyService;
 
     @Mock
-    private MockSmsGateway mockSmsGateway; // Mock the specific mock implementation
+    private MockSmsGateway mockSmsGateway;
 
     private List<MobileMoneyService> mobileMoneyServices;
 

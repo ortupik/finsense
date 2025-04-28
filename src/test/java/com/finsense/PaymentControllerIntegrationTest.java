@@ -40,17 +40,17 @@ class PaymentControllerIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        paymentTransactionRepository.deleteAll(); // Clean up the database before each test
+        paymentTransactionRepository.deleteAll();
     }
 
     @Test
-    @WithMockUser(authorities = {"SCOPE_payment:initiate"}) // Mock authenticated user with scope
+    @WithMockUser(authorities = {"SCOPE_payment:initiate"})
     void testInitiatePayment_Success() throws Exception {
         B2CPaymentRequest request = new B2CPaymentRequest();
         request.setRecipientPhoneNumber("+254712345678");
         request.setAmount(BigDecimal.valueOf(500.00));
         request.setCurrency("KES");
-        request.setProvider("MOCK"); // Use the mock provider
+        request.setProvider("MOCK");
         request.setDescription("Integration test payment");
 
         mockMvc.perform(post("/api/v1/payments/initiate")
@@ -79,7 +79,7 @@ class PaymentControllerIntegrationTest {
     }
 
     @Test
-    @WithMockUser(authorities = {"SCOPE_payment:status"}) // Mock authenticated user with scope
+    @WithMockUser(authorities = {"SCOPE_payment:status"})
     void testGetPaymentStatus_Found() throws Exception {
         PaymentTransaction transaction = new PaymentTransaction();
         transaction.setId("test-transaction-id");

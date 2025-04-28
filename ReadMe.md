@@ -174,6 +174,9 @@ The microservice exposes the following REST endpoints under the `/api/v1/payment
 ---
 
 ## Security (OAuth2)
+
+** Security is disabled for this exercise. **
+
 The microservice acts as an OAuth2 Resource Server. It expects incoming requests to the secured endpoints (`/api/v1/payments/initiate`, `/api/v1/payments/{transactionId}/status`) to include a valid **JWT Bearer** token in the Authorization header.
 
 The microservice validates the token's signature using the JWK Set obtained from the URI configured in `spring.security.oauth2.resourceserver.jwt.jwk-set-uri`. It also checks if the token contains the required scopes (`payment:initiate`, `payment:status`) using `@PreAuthorize`.
