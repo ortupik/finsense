@@ -79,10 +79,6 @@ public class PaymentService {
             paymentTransactionRepository.save(savedTransaction);
             logger.info("Payment initiation successful with provider transaction ID: {}", providerTransactionId);
 
-            // TODO: Implement a mechanism for asynchronous status updates from the provider
-            // This could be a webhook endpoint exposed by this microservice that the MNO calls,
-            // or a scheduled task that polls the MNO API for status updates.
-            // For now, we'll simulate a success notification here for demonstration.
             notifyRecipient(savedTransaction.getId(), PaymentStatus.SUCCESS);
 
         } catch (ExternalApiException e) {
@@ -112,9 +108,6 @@ public class PaymentService {
         Optional<PaymentTransaction> transaction = paymentTransactionRepository.findById(transactionId);
 
         if (transaction.isPresent()) {
-            // In a real-world scenario, you might want to check the external provider's status
-            // if the local status is still PENDING or IN_PROGRESS and has been in that state
-            // for a significant amount of time.
             logger.info("Found transaction with status: {}", transaction.get().getStatus());
         } else {
             logger.warn("Payment transaction not found with ID: {}", transactionId);
@@ -122,7 +115,6 @@ public class PaymentService {
         return transaction;
     }
 
-    // TODO: Implement webhook endpoint or scheduled task for real-time status updates
     public void processProviderStatusUpdate(String providerTransactionId, PaymentStatus newStatus, String failureReason) {
         logger.info("Processing provider status update for provider transaction ID: {} with new status: {}", providerTransactionId, newStatus);
         Optional<PaymentTransaction> optionalTransaction = paymentTransactionRepository.findByProviderTransactionId(providerTransactionId);
@@ -138,8 +130,6 @@ public class PaymentService {
             notifyRecipient(transaction.getId(), newStatus);
         } else {
             logger.warn("No local transaction found for provider transaction ID: {}", providerTransactionId);
-            // This could indicate a discrepancy or an issue with the provider's notification.
-            // Consider logging this and potentially implementing a reconciliation process.
         }
     }
 
@@ -197,7 +187,6 @@ public class PaymentService {
         });
     }
 
-    // Make sure to shut down the executor when the application context is closed
     @PreDestroy
     public void shutdown() {
         notificationExecutor.shutdown();

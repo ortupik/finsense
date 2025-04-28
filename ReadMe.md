@@ -1,7 +1,5 @@
 # B2C Mobile Money Payment Microservice
 
-This project is a **Spring Boot** microservice designed to handle **B2C (Business-to-Consumer)** mobile money payment initiations and status tracking. It integrates with external mobile money providers and an SMS gateway through abstract interfaces, allowing for easy swapping of concrete implementations. Security is enforced using **OAuth2**.
-
 ---
 
 ## Features
@@ -67,7 +65,7 @@ pom.xml                             # Maven project file
 ---
 
 ## Prerequisites
-- **Java Development Kit (JDK) 17** or later (as configured in `pom.xml`).
+- **Java Development Kit (JDK) 1.8**  (as configured in `pom.xml`).
 - **Maven 3.6+**.
 - **Docker** (optional, for containerization).
 
@@ -94,7 +92,7 @@ mvn spring-boot:run
 Alternatively, you can run the generated JAR file:
 
 ```bash
-java -jar target/payment-0.0.1-SNAPSHOT.jar
+java -jar target/finsense-app-0.0.1-SNAPSHOT.jarr
 ```
 
 The application will start on the port configured in `application.properties` (default is **8080**).
